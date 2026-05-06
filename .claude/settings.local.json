@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\HP\\\\Desktop\\\\carpool-dashboard\" -Recurse -Force)",
+      "Bash(Select-Object FullName, PSIsContainer)",
+      "Bash(Sort-Object FullName)",
+      "Bash(Format-Table -AutoSize)",
+      "Bash(npm run *)",
+      "Bash(npx vercel *)",
+      "Bash(where vercel *)",
+      "Bash(npx localtunnel *)",
+      "Bash(npx next *)",
+      "Bash(del \"C:\\\\Users\\\\HP\\\\Desktop\\\\carpool-dashboard\\\\app\\\\page.tsx\")",
+      "Bash(rm \"C:\\\\Users\\\\HP\\\\Desktop\\\\carpool-dashboard\\\\app\\\\page.tsx\")",
+      "Bash(npx cloudflared *)",
+      "Bash(npm uninstall *)",
+      "Bash(npm install *)",
+      "Bash(netstat -ano)",
+      "Bash(findstr \":3000\")",
+      "Bash(findstr \"LISTENING\")",
+      "Bash(taskkill /PID 8292 /F)",
+      "PowerShell(Stop-Process -Id 8292 -Force)",
+      "PowerShell(Get-Process node -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Force)",
+      "PowerShell(Get-Process cloudflared -ErrorAction SilentlyContinue)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}
