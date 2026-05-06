@@ -107,19 +107,19 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
   const routeParts    = routeLabel ? routeLabel.split(" → ") : [];
   const hasRouteParts = routeParts.length === 2;
 
-  const base = "w-full bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 placeholder-slate-300";
+  const base = "w-full bg-white/60 border border-white/70 rounded-xl text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-200/60 focus:border-indigo-300/80 focus:bg-white/90 placeholder-slate-400";
   const distanceHighlight = status === S.DONE ? "border-indigo-300 bg-indigo-50/60" : "";
 
   return (
-    <div className="bg-white/60 backdrop-blur-sm rounded-3xl border border-white/80 shadow-sm p-5 mb-4">
-      <div className="flex items-center gap-2 mb-4">
-        <div className="w-7 h-7 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+    <div className="bg-white/50 backdrop-blur-md rounded-3xl border border-white/60 shadow-xl shadow-indigo-100/40 p-6 mb-5">
+      <div className="flex items-center gap-2 mb-5">
+        <div className="w-8 h-8 rounded-full bg-indigo-100/80 border border-indigo-100 flex items-center justify-center flex-shrink-0">
           <MapPin className="w-3.5 h-3.5 text-indigo-600" />
         </div>
         <h2 className="text-sm font-semibold text-slate-700">Trip Details</h2>
       </div>
 
-      <div className="mb-3">
+      <div className="mb-4">
         {/* URL input with inline clear button */}
         <div className="relative">
           <input
@@ -148,7 +148,7 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
           <div
             role="status"
             aria-live="polite"
-            className="mt-2 flex items-center gap-2 rounded-xl bg-slate-50 border border-slate-100 px-3 py-2"
+            className="mt-2 flex items-center gap-2 rounded-2xl bg-white/70 border border-slate-200/60 px-3.5 py-2.5"
           >
             <Loader2 className="w-3.5 h-3.5 animate-spin text-indigo-400 flex-shrink-0" />
             <p className="text-xs text-slate-500">Detecting route and distance…</p>
@@ -157,7 +157,7 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
 
         {/* ── Success — route preview pill ──────────────────────────── */}
         {status === S.DONE && (
-          <div className="mt-2 rounded-xl bg-indigo-50 border border-indigo-100 px-3 py-2.5">
+          <div className="mt-2 rounded-2xl bg-indigo-50/90 border border-indigo-200/50 px-3.5 py-2.5">
             {hasRouteParts ? (
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-indigo-500 flex-shrink-0" />
@@ -189,7 +189,7 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
           <div
             role="status"
             aria-live="polite"
-            className="mt-2 flex items-start gap-2 rounded-xl bg-amber-50 border border-amber-100 px-3 py-2"
+            className="mt-2 flex items-start gap-2 rounded-2xl bg-amber-50/90 border border-amber-200/50 px-3.5 py-2.5"
           >
             <AlertCircle className="w-3.5 h-3.5 text-amber-400 flex-shrink-0 mt-0.5" />
             <p className="text-xs text-amber-700">
@@ -202,7 +202,7 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
         {status === S.ERROR && (
           <div
             role="alert"
-            className="mt-2 flex items-start gap-2 rounded-xl bg-red-50 border border-red-100 px-3 py-2"
+            className="mt-2 flex items-start gap-2 rounded-2xl bg-red-50/90 border border-red-200/50 px-3.5 py-2.5"
           >
             <AlertCircle className="w-3.5 h-3.5 text-red-400 flex-shrink-0 mt-0.5" />
             <p className="text-xs text-red-600">
@@ -212,14 +212,14 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
         )}
       </div>
 
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-3 gap-3">
         <label className="block">
-          <span className="text-xs font-medium text-slate-400 block mb-1">Distance</span>
+          <span className="text-xs font-medium text-slate-500 block mb-1">Distance</span>
           <div className="relative">
             <input
               type="number"
               min="0"
-              className={`${base} px-3 py-2 pr-7 ${distanceHighlight}`}
+              className={`${base} px-3 py-2.5 pr-7 ${distanceHighlight}`}
               value={distance}
               onChange={(e) => setDistance(e.target.value)}
               suppressHydrationWarning
@@ -232,13 +232,13 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
           </div>
         </label>
         <label className="block">
-          <span className="text-xs font-medium text-slate-400 block mb-1">Fuel</span>
+          <span className="text-xs font-medium text-slate-500 block mb-1">Fuel</span>
           <div className="relative">
             <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-slate-400 pointer-events-none">RM</span>
             <input
               type="number"
               min="0"
-              className={`${base} px-3 py-2 pl-7`}
+              className={`${base} px-3 py-2.5 pl-7`}
               value={fuel}
               onChange={(e) => setFuel(e.target.value)}
               suppressHydrationWarning
@@ -246,13 +246,13 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
           </div>
         </label>
         <label className="block">
-          <span className="text-xs font-medium text-slate-400 block mb-1">Toll</span>
+          <span className="text-xs font-medium text-slate-500 block mb-1">Toll</span>
           <div className="relative">
             <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-slate-400 pointer-events-none">RM</span>
             <input
               type="number"
               min="0"
-              className={`${base} px-3 py-2 pl-7`}
+              className={`${base} px-3 py-2.5 pl-7`}
               value={toll}
               onChange={(e) => setToll(e.target.value)}
               suppressHydrationWarning

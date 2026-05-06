@@ -13,10 +13,10 @@ export default function ShareBar({ url }) {
   };
 
   return (
-    <div className="mb-10">
+    <div className="mb-12">
       <button
         onClick={copy}
-        className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-slate-800 hover:bg-slate-900 active:scale-95 text-white text-sm font-semibold transition-all"
+        className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-gradient-to-r from-slate-800 to-indigo-900 hover:from-slate-700 hover:to-indigo-800 active:scale-95 text-white text-sm font-semibold transition-all shadow-lg shadow-indigo-900/20"
         suppressHydrationWarning
       >
         {copied ? (

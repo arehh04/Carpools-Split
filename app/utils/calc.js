@@ -33,10 +33,11 @@ export function calculateSplit(distance, fuel, toll, passengers) {
     activeIdx.forEach((idx) => { amounts[idx] += share; });
   }
 
-  // Build display map — duplicate names get a "(2)" suffix
+  // Build display map — skip zero-amount passengers (no km set), duplicate names get "(2)" suffix
   const result = {};
   const seen = {};
   passengers.forEach((p, i) => {
+    if (amounts[i] <= 0) return;
     const base = p.name?.trim() || `Passenger ${i + 1}`;
     seen[base] = (seen[base] || 0) + 1;
     const key = seen[base] > 1 ? `${base} (${seen[base]})` : base;

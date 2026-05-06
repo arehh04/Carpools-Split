@@ -37,6 +37,7 @@ const FIXED_TOLL = {
   E22: 3.00, // DUKE 2
   E23: 3.00, // SUKE
   E33: 3.00, // LEKAS
+  E35: 2.50, // Guthrie Corridor Expressway (OSM tags as E35, not E13)
   E37: 4.00, // SKVE / Linkedua (Johor corridor)
 };
 

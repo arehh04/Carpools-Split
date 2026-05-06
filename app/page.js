@@ -34,15 +34,15 @@ export default function Home() {
       : "";
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-8 px-4">
+    <main className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-violet-100 py-10 px-5">
       <div className="max-w-[480px] mx-auto">
 
-        <header className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-indigo-600 text-white mb-3 shadow-md shadow-indigo-200">
-            <Car className="w-6 h-6" />
+        <header className="text-center mb-10">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-3xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white mb-4 shadow-xl shadow-indigo-300/40 ring-4 ring-indigo-100">
+            <Car className="w-7 h-7" />
           </div>
-          <h1 className="text-xl font-bold text-slate-800">Carpool Split</h1>
-          <p className="text-sm text-slate-400 mt-1">Split trip costs fairly, share instantly</p>
+          <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Carpool Split</h1>
+          <p className="text-sm text-slate-400 mt-2">Split trip costs fairly, share instantly</p>
         </header>
 
         <TripForm
