@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Copy, Check } from "lucide-react";
 
 export default function ShareBar({ url }) {
   const [copied, setCopied] = useState(false);
@@ -12,23 +13,24 @@ export default function ShareBar({ url }) {
   };
 
   return (
-    <div className="mt-4 border rounded p-4 bg-gray-50">
-      <h2 className="font-semibold mb-3 text-sm uppercase tracking-wide text-gray-500">
-        Share Trip
-      </h2>
-      <div className="flex gap-2">
-        <input
-          readOnly
-          value={url}
-          className="border rounded p-2 text-sm flex-1 text-gray-500 bg-white"
-        />
-        <button
-          onClick={copy}
-          className="bg-green-500 text-white px-4 py-2 rounded text-sm whitespace-nowrap"
-        >
-          {copied ? "Copied!" : "Copy Link"}
-        </button>
-      </div>
+    <div className="mb-10">
+      <button
+        onClick={copy}
+        className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-slate-800 hover:bg-slate-900 active:scale-95 text-white text-sm font-semibold transition-all"
+        suppressHydrationWarning
+      >
+        {copied ? (
+          <>
+            <Check className="w-4 h-4" />
+            Link Copied!
+          </>
+        ) : (
+          <>
+            <Copy className="w-4 h-4" />
+            Share Trip
+          </>
+        )}
+      </button>
     </div>
   );
 }
