@@ -1,10 +1,17 @@
-import { useState } from "react";
+"use client";
+
+import { useState, useMemo, useCallback } from "react";
 import MemoSheet from "./MemoSheet";
 
 const NEONS = ["#00E5FF", "#FF007A", "#9B5DE5", "#00FF9F", "#F8E71C", "#00BFFF"];
 
 export default function Result({ result, distance, fuel, toll }) {
   const [memoOpen, setMemoOpen] = useState(false);
+  const receiptDate = useMemo(
+    () => new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }).toUpperCase(),
+    []
+  );
+  const handleMemoClose = useCallback(() => setMemoOpen(false), []);
   const entries = Object.entries(result);
   const total = entries.reduce((sum, [, v]) => sum + v, 0);
 
@@ -108,7 +115,7 @@ export default function Result({ result, distance, fuel, toll }) {
 
       {/* Receipt footer */}
       <div className="mt-4 px-1">
-        <p className="font-orbitron text-[9px] text-[#00E5FF]/15 tracking-widest text-center mb-3 select-none">
+        <p aria-hidden="true" className="font-orbitron text-[9px] text-[#00E5FF]/15 tracking-widest text-center mb-3 select-none">
           {"- ".repeat(20)}
         </p>
 
@@ -125,14 +132,12 @@ export default function Result({ result, distance, fuel, toll }) {
           </div>
         )}
 
-        <p className="font-orbitron text-[9px] text-[#00E5FF]/15 tracking-widest text-center mb-3 select-none">
+        <p aria-hidden="true" className="font-orbitron text-[9px] text-[#00E5FF]/15 tracking-widest text-center mb-3 select-none">
           {"- ".repeat(20)}
         </p>
 
         <p className="font-orbitron text-[9px] text-[#00E5FF]/20 tracking-widest text-center mb-3">
-          {new Date()
-            .toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })
-            .toUpperCase()}
+          {receiptDate}
         </p>
 
         <button
@@ -146,7 +151,7 @@ export default function Result({ result, distance, fuel, toll }) {
 
       <MemoSheet
         open={memoOpen}
-        onClose={() => setMemoOpen(false)}
+        onClose={handleMemoClose}
         result={result}
         distance={distance}
         fuel={fuel}
