@@ -29,7 +29,7 @@ export default function Result({ result }) {
           RM {total.toFixed(2)}
         </p>
         <p className="text-[10px] text-[#00E5FF]/30 mt-2 tracking-widest">
-          {entries.length} PASSENGER{entries.length !== 1 ? "S" : ""} · COST MATRIX COMPUTED
+          {entries.length} CREW MEMBER{entries.length !== 1 ? "S" : ""} · COST MATRIX COMPUTED
         </p>
       </div>
 
@@ -87,7 +87,7 @@ export default function Result({ result }) {
               </div>
 
               {/* Progress bar */}
-              <div className="h-px bg-[#1a2545] overflow-hidden">
+              <div className="h-0.5 bg-[#1a2545] overflow-hidden">
                 <div
                   className="h-full transition-all duration-500"
                   style={{

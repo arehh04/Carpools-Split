@@ -265,7 +265,7 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
         </label>
 
         <label className="block">
-          <span className="text-[10px] font-bold text-[#00E5FF]/50 tracking-widest block mb-1 uppercase flex items-center gap-1">
+          <span className="text-[10px] font-bold text-[#00E5FF]/50 tracking-widest mb-1 uppercase flex items-center gap-1">
             Toll
             {tollIsEstimated && (
               <span className="text-[8px] font-bold px-1 py-0.5 border border-[#F8E71C]/40 text-[#F8E71C]/70 tracking-widest">

@@ -41,14 +41,14 @@ export default function PassengerTable({ passengers, setPassengers, driverName, 
           <button
             type="button"
             onClick={() => setDriverName("Driver")}
-            className="w-full flex items-center gap-3 px-4 py-3.5 border border-dashed border-[#00E5FF]/20 bg-[#0d1525]/50 hover:border-[#00E5FF]/50 hover:bg-[#00E5FF]/5 transition-all group"
+            className="w-full flex items-center gap-3 px-4 py-3.5 border border-dashed border-[#00E5FF]/30 bg-[#0d1525] hover:border-[#00E5FF]/60 hover:bg-[#00E5FF]/5 transition-all group"
           >
             <div
-              className="w-8 h-8 flex-shrink-0 flex items-center justify-center text-[9px] font-bold font-orbitron text-[#00E5FF]/25 group-hover:text-[#00E5FF]/60 transition-all"
+              className="w-8 h-8 flex-shrink-0 flex items-center justify-center text-[9px] font-bold font-orbitron text-[#00E5FF]/35 group-hover:text-[#00E5FF]/70 transition-all"
               style={{
                 clipPath: "polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px))",
-                border: "1px dashed rgba(0,229,255,0.2)",
-                backgroundColor: "rgba(0,229,255,0.03)",
+                border: "1px dashed rgba(0,229,255,0.35)",
+                backgroundColor: "rgba(0,229,255,0.05)",
               }}
             >
               DRV
@@ -57,7 +57,7 @@ export default function PassengerTable({ passengers, setPassengers, driverName, 
               <p className="font-orbitron text-[10px] font-bold text-[#00E5FF]/30 group-hover:text-[#00E5FF]/60 tracking-widest transition-all">
                 + REGISTER DRIVER
               </p>
-              <p className="text-[9px] text-slate-700 mt-0.5 tracking-wider">
+              <p className="text-[9px] text-[#00E5FF]/25 mt-0.5 tracking-wider group-hover:text-[#00E5FF]/45 transition-all">
                 Driver pays for the full route
               </p>
             </div>
@@ -118,9 +118,9 @@ export default function PassengerTable({ passengers, setPassengers, driverName, 
       <div className="space-y-2.5">
 
         {passengers.length === 0 && (
-          <div className="border border-dashed border-[#00E5FF]/10 bg-[#0d1525]/40 py-6 text-center">
-            <p className="text-xs text-slate-700">NO PASSENGERS LOGGED</p>
-            <p className="text-[10px] text-slate-800 mt-0.5 tracking-wider">INITIALIZE BELOW</p>
+          <div className="border border-dashed border-[#00E5FF]/15 bg-[#0d1525]/60 py-6 text-center">
+            <p className="text-xs text-slate-600">NO PASSENGERS LOGGED</p>
+            <p className="text-[10px] text-slate-700 mt-0.5 tracking-wider">TAP BELOW TO ADD</p>
           </div>
         )}
 
@@ -209,7 +209,7 @@ export default function PassengerTable({ passengers, setPassengers, driverName, 
                 <div className="mt-2">
                   <span
                     className="font-orbitron text-[10px] font-bold tracking-widest inline-block px-3 py-1"
-                    style={{ color: `${neon}50`, border: `1px dashed ${neon}20`, backgroundColor: `${neon}04` }}
+                    style={{ color: `${neon}50`, border: `1px dashed ${neon}20`, backgroundColor: `${neon}0d` }}
                   >
                     FULL ROUTE · 0 → {totalDist}km
                   </span>
