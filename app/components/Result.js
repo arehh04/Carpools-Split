@@ -1,6 +1,10 @@
+import { useState } from "react";
+import MemoSheet from "./MemoSheet";
+
 const NEONS = ["#00E5FF", "#FF007A", "#9B5DE5", "#00FF9F", "#F8E71C", "#00BFFF"];
 
 export default function Result({ result, distance, fuel, toll }) {
+  const [memoOpen, setMemoOpen] = useState(false);
   const entries = Object.entries(result);
   const total = entries.reduce((sum, [, v]) => sum + v, 0);
 
@@ -101,6 +105,53 @@ export default function Result({ result, distance, fuel, toll }) {
           );
         })}
       </div>
+
+      {/* Receipt footer */}
+      <div className="mt-4 px-1">
+        <p className="font-orbitron text-[9px] text-[#00E5FF]/15 tracking-widest text-center mb-3 select-none">
+          {"- ".repeat(20)}
+        </p>
+
+        <div className="flex justify-between font-orbitron text-[10px] text-[#00E5FF]/35 tracking-wider mb-1">
+          <span>DISTANCE&nbsp;&nbsp;{Number(distance) || 0}km</span>
+          {Number(fuel) > 0 && (
+            <span>FUEL&nbsp;&nbsp;RM {Number(fuel).toFixed(2)}</span>
+          )}
+        </div>
+
+        {Number(toll) > 0 && (
+          <div className="font-orbitron text-[10px] text-[#00E5FF]/35 tracking-wider mb-3">
+            TOLL&nbsp;&nbsp;RM {Number(toll).toFixed(2)}
+          </div>
+        )}
+
+        <p className="font-orbitron text-[9px] text-[#00E5FF]/15 tracking-widest text-center mb-3 select-none">
+          {"- ".repeat(20)}
+        </p>
+
+        <p className="font-orbitron text-[9px] text-[#00E5FF]/20 tracking-widest text-center mb-3">
+          {new Date()
+            .toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })
+            .toUpperCase()}
+        </p>
+
+        <button
+          type="button"
+          onClick={() => setMemoOpen(true)}
+          className="w-full font-orbitron text-[10px] font-bold tracking-widest py-3 border border-dashed border-[#00E5FF]/25 text-[#00E5FF]/40 hover:text-[#00E5FF]/70 hover:border-[#00E5FF]/50 hover:bg-[#00E5FF]/5 active:scale-[0.98] transition-all"
+        >
+          SHARE MEMO ↑
+        </button>
+      </div>
+
+      <MemoSheet
+        open={memoOpen}
+        onClose={() => setMemoOpen(false)}
+        result={result}
+        distance={distance}
+        fuel={fuel}
+        toll={toll}
+      />
     </div>
   );
 }
