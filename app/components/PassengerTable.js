@@ -41,7 +41,7 @@ export default function PassengerTable({ passengers, setPassengers, driverName, 
           <button
             type="button"
             onClick={() => setDriverName("Driver")}
-            className="w-full flex items-center gap-3 px-4 py-3.5 border border-dashed border-[#00E5FF]/30 bg-[#0d1525] hover:border-[#00E5FF]/60 hover:bg-[#00E5FF]/5 transition-all group"
+            className="w-full flex items-center gap-3 px-4 py-3.5 border border-dashed border-[#00E5FF]/30 bg-white/5 rounded-xl hover:border-[#00E5FF]/60 hover:bg-[#00E5FF]/5 hover:scale-[1.01] transition-all duration-200 group"
           >
             <div
               className="w-8 h-8 flex-shrink-0 flex items-center justify-center text-[9px] font-bold font-orbitron text-[#00E5FF]/35 group-hover:text-[#00E5FF]/70 transition-all"
@@ -65,10 +65,9 @@ export default function PassengerTable({ passengers, setPassengers, driverName, 
         ) : (
           /* Active driver card */
           <div
-            className="relative bg-[#0d1525] px-4 py-4"
-            style={{ borderLeft: "2px solid #00E5FF", borderBottom: "1px solid rgba(0,229,255,0.13)" }}
+            className="relative glass rounded-xl px-4 py-4"
+            style={{ borderLeft: "2px solid #00E5FF" }}
           >
-            <span className="absolute top-0 right-0 w-3 h-3" style={{ borderTop: "1px solid rgba(0,229,255,0.4)", borderRight: "1px solid rgba(0,229,255,0.4)" }} />
 
             <div className="flex items-center gap-3">
               <div
@@ -118,7 +117,7 @@ export default function PassengerTable({ passengers, setPassengers, driverName, 
       <div className="space-y-2.5">
 
         {passengers.length === 0 && (
-          <div className="border border-dashed border-[#00E5FF]/15 bg-[#0d1525]/60 py-6 text-center">
+          <div className="border border-dashed border-[#00E5FF]/15 bg-white/5 rounded-xl py-6 text-center">
             <p className="text-xs text-slate-600">NO PASSENGERS LOGGED</p>
             <p className="text-[10px] text-slate-700 mt-0.5 tracking-wider">TAP BELOW TO ADD</p>
           </div>
@@ -136,13 +135,9 @@ export default function PassengerTable({ passengers, setPassengers, driverName, 
           return (
             <div
               key={i}
-              className="relative bg-[#0d1525] px-4 py-4"
-              style={{ borderLeft: `2px solid ${neon}`, borderBottom: `1px solid ${neon}22` }}
+              className="relative glass rounded-xl px-4 py-4"
+              style={{ borderLeft: `2px solid ${neon}` }}
             >
-              <span
-                className="absolute top-0 right-0 w-3 h-3"
-                style={{ borderTop: `1px solid ${neon}60`, borderRight: `1px solid ${neon}60` }}
-              />
 
               {/* Name row */}
               <div className="flex items-center gap-3">
@@ -230,7 +225,8 @@ export default function PassengerTable({ passengers, setPassengers, driverName, 
                           color: neon,
                           padding: "8px",
                           border: `1px solid ${kmInvalid ? "#FF007A60" : `${neon}30`}`,
-                          backgroundColor: "#050d1e",
+                          backgroundColor: "rgba(255,255,255,0.05)",
+                          borderRadius: "6px",
                         }}
                         onFocus={(e) => (e.target.style.borderColor = `${neon}90`)}
                         onBlur={(e) => (e.target.style.borderColor = kmInvalid ? "#FF007A60" : `${neon}30`)}
@@ -257,7 +253,8 @@ export default function PassengerTable({ passengers, setPassengers, driverName, 
                           color: neon,
                           padding: "8px",
                           border: `1px solid ${kmInvalid ? "#FF007A60" : `${neon}30`}`,
-                          backgroundColor: "#050d1e",
+                          backgroundColor: "rgba(255,255,255,0.05)",
+                          borderRadius: "6px",
                         }}
                         onFocus={(e) => (e.target.style.borderColor = `${neon}90`)}
                         onBlur={(e) => (e.target.style.borderColor = kmInvalid ? "#FF007A60" : `${neon}30`)}
@@ -301,7 +298,7 @@ export default function PassengerTable({ passengers, setPassengers, driverName, 
       {/* ── Add passenger ──────────────────────────────────────── */}
       <button
         onClick={() => setPassengers([...passengers, { name: "", start: 0, end: 0, mode: "full" }])}
-        className="mt-3 w-full flex items-center justify-center gap-2 py-3.5 border border-dashed border-[#00E5FF]/20 font-orbitron text-[10px] font-bold text-[#00E5FF]/35 hover:text-[#00E5FF]/70 hover:border-[#00E5FF]/50 hover:bg-[#00E5FF]/5 active:scale-[0.98] transition-all tracking-widest"
+        className="mt-3 w-full flex items-center justify-center gap-2 py-3.5 border border-dashed border-[#00E5FF]/20 rounded-xl font-orbitron text-[10px] font-bold text-[#00E5FF]/35 hover:text-[#00E5FF]/70 hover:border-[#00E5FF]/50 hover:bg-[#00E5FF]/10 hover:scale-[1.01] hover:shadow-[0_0_20px_rgba(0,229,255,0.2)] active:scale-[0.97] transition-all duration-200 tracking-widest"
         type="button"
       >
         <Plus className="w-3.5 h-3.5" />
