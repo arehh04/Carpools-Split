@@ -124,7 +124,7 @@ export default function Home() {
           </div>
         )}
 
-        <Result result={result} />
+        <Result result={result} distance={distance} fuel={fuel} toll={toll} />
 
         <ShareBar url={shareUrl} />
 

@@ -1,6 +1,6 @@
 const NEONS = ["#00E5FF", "#FF007A", "#9B5DE5", "#00FF9F", "#F8E71C", "#00BFFF"];
 
-export default function Result({ result }) {
+export default function Result({ result, distance, fuel, toll }) {
   const entries = Object.entries(result);
   const total = entries.reduce((sum, [, v]) => sum + v, 0);
 
