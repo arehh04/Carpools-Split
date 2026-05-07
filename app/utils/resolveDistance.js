@@ -74,7 +74,7 @@ export async function resolveRouteFromCoords(from, to) {
  * @returns {{ km: number, estimatedToll: number }}
  */
 export async function resolveRouteWithToll(from, to) {
-  const url = `${OSRM}/${from.lon},${from.lat};${to.lon},${to.lat}?steps=true&overview=false`;
+  const url = `${OSRM}/${from.lon},${from.lat};${to.lon},${to.lat}?steps=true&overview=full&geometries=geojson`;
   const res = await fetchWithTimeout(url);
 
   if (!res.ok) throw new Error(`OSRM failed (${res.status})`);
@@ -89,5 +89,5 @@ export async function resolveRouteWithToll(from, to) {
   const steps = route.legs?.[0]?.steps ?? [];
   const estimatedToll = estimateTollFromSteps(steps);
 
-  return { km, estimatedToll };
+  return { km, estimatedToll, geometry: route.geometry ?? null };
 }
