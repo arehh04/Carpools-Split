@@ -12,7 +12,7 @@ const PHRASES = [
 ];
 
 export default function MemoSheet({ open, onClose, result, distance, fuel, toll }) {
-  const entries = Object.entries(result);
+  const entries = result ? Object.entries(result) : [];
   const total = entries.reduce((sum, [, v]) => sum + v, 0);
   const phrase = PHRASES[Math.floor(total * 7) % PHRASES.length];
   const dateStr = new Date().toLocaleDateString("en-GB", {
@@ -42,7 +42,10 @@ export default function MemoSheet({ open, onClose, result, distance, fuel, toll 
 
       {/* Sheet panel */}
       <div
-        className="fixed bottom-0 left-0 right-0 z-50 max-h-[80vh] overflow-y-auto rounded-t-2xl bg-[#FFFDF5] p-6"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Trip memo"
+        className="fixed bottom-0 left-0 right-0 z-[51] max-h-[80vh] overflow-y-auto overscroll-contain rounded-t-2xl bg-[#FFFDF5] p-6 will-change-transform"
         style={{
           transform: open ? "translateY(0)" : "translateY(100%)",
           transition: "transform 300ms ease-out",
