@@ -1,8 +1,9 @@
 export function encodeTrip(data) {
   const p = data.passengers
-    .map((x) => `${x.name},${x.start},${x.end}`)
+    .map((x) => `${x.name},${x.start},${x.end},${x.mode || "full"}`)
     .join("|");
 
+  // Include mode as 4th field; old 3-field URLs decode as "partial" (they had explicit km values)
   let url = `?d=${data.distance}&f=${data.fuel}&t=${data.toll}&p=${encodeURIComponent(p)}`;
   if (data.driverName != null) url += `&dr=${encodeURIComponent(data.driverName)}`;
   return url;
@@ -21,8 +22,12 @@ export function decodeTrip() {
     passengers = decodeURIComponent(params.get("p"))
       .split("|")
       .map((x) => {
-        const [name, start, end] = x.split(",");
-        return { name, start: Number(start), end: Number(end) };
+        const parts = x.split(",");
+        const name  = parts[0];
+        const start = Number(parts[1] ?? 0);
+        const end   = Number(parts[2] ?? 0);
+        const mode  = parts[3] ?? "partial"; // old 3-field URLs default to partial
+        return { name, start, end, mode };
       });
   }
 

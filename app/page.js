@@ -27,7 +27,13 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    setResult(calculateSplit(distance, fuel, toll, passengers, driverName));
+    // Full-ride passengers ride 0 → total distance; resolved here so calc stays pure
+    const passengersForCalc = passengers.map((p) =>
+      p.mode !== "partial"
+        ? { ...p, start: 0, end: Number(distance) }
+        : p
+    );
+    setResult(calculateSplit(distance, fuel, toll, passengersForCalc, driverName));
   }, [distance, fuel, toll, passengers, driverName]);
 
   const shareUrl =
