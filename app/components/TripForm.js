@@ -33,7 +33,7 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
     setRouteLabel(null);
     setStatus(S.IDLE);
     resolvedGeometry.current = null;
-    setRouteGeometry(null);
+    setRouteGeometry?.(null);
   }
 
   useEffect(() => {
@@ -207,10 +207,10 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
             onClick={() => {
               if (mapVisible) {
                 setMapVisible(false);
-                setRouteGeometry(null);
+                setRouteGeometry?.(null);
               } else {
                 setMapVisible(true);
-                setRouteGeometry({
+                setRouteGeometry?.({
                   coordinates: resolvedGeometry.current.coordinates,
                   totalKm: resolvedGeometry.current.totalKm,
                 });
