@@ -1,11 +1,4 @@
-const COLORS = [
-  { bar: "bg-violet-400", bg: "bg-violet-50/90", text: "text-violet-600", avatar: "bg-violet-400" },
-  { bar: "bg-blue-400",   bg: "bg-blue-50/90",   text: "text-blue-600",   avatar: "bg-blue-400"   },
-  { bar: "bg-emerald-400",bg: "bg-emerald-50/90", text: "text-emerald-600",avatar: "bg-emerald-400"},
-  { bar: "bg-amber-400",  bg: "bg-amber-50/90",  text: "text-amber-600",  avatar: "bg-amber-400"  },
-  { bar: "bg-rose-400",   bg: "bg-rose-50/90",   text: "text-rose-600",   avatar: "bg-rose-400"   },
-  { bar: "bg-cyan-400",   bg: "bg-cyan-50/90",   text: "text-cyan-600",   avatar: "bg-cyan-400"   },
-];
+const NEONS = ["#00E5FF", "#FF007A", "#9B5DE5", "#00FF9F", "#F8E71C", "#00BFFF"];
 
 export default function Result({ result }) {
   const entries = Object.entries(result);
@@ -16,33 +9,93 @@ export default function Result({ result }) {
   return (
     <div className="mb-6">
       {/* Total card */}
-      <div className="bg-gradient-to-br from-indigo-500 to-violet-600 rounded-3xl p-6 mb-4 text-white shadow-2xl shadow-indigo-300/50">
-        <p className="text-xs font-medium opacity-70 mb-1 uppercase tracking-wide">Total Trip Cost</p>
-        <p className="text-5xl font-bold tracking-tight">RM {total.toFixed(2)}</p>
-        <p className="text-xs opacity-60 mt-1">{entries.length} passenger{entries.length !== 1 ? "s" : ""}</p>
+      <div
+        className="relative border border-[#00E5FF]/30 bg-[#0d1525] p-6 mb-4"
+        style={{ boxShadow: "0 0 30px rgba(0,229,255,0.08), inset 0 0 30px rgba(0,229,255,0.03)" }}
+      >
+        {/* Corner brackets */}
+        <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#00E5FF]" />
+        <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#00E5FF]" />
+        <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#00E5FF]" />
+        <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#00E5FF]" />
+
+        <p className="font-orbitron text-[9px] text-[#00E5FF]/50 tracking-[0.3em] uppercase mb-2">
+          // Total Expenditure
+        </p>
+        <p
+          className="font-orbitron text-4xl font-black text-[#00E5FF]"
+          style={{ textShadow: "0 0 20px rgba(0,229,255,0.6), 0 0 40px rgba(0,229,255,0.2)" }}
+        >
+          RM {total.toFixed(2)}
+        </p>
+        <p className="text-[10px] text-[#00E5FF]/30 mt-2 tracking-widest">
+          {entries.length} PASSENGER{entries.length !== 1 ? "S" : ""} · COST MATRIX COMPUTED
+        </p>
       </div>
 
-      {/* Per-person cards */}
-      <div className="space-y-3">
+      {/* Per-person rows */}
+      <div className="space-y-2.5">
         {entries.map(([name, val], i) => {
-          const c = COLORS[i % COLORS.length];
+          const neon = NEONS[i % NEONS.length];
           const pct = total > 0 ? Math.round((val / total) * 100) : 0;
+          const initial = name[0]?.toUpperCase() ?? "?";
+
           return (
-            <div key={name} className={`${c.bg} backdrop-blur-sm rounded-2xl p-5 border border-white/60 shadow-sm`}>
+            <div
+              key={name}
+              className="relative bg-[#0d1525] px-4 py-4"
+              style={{ borderLeft: `2px solid ${neon}`, borderBottom: `1px solid ${neon}22` }}
+            >
+              <span
+                className="absolute top-0 right-0 w-3 h-3"
+                style={{ borderTop: `1px solid ${neon}60`, borderRight: `1px solid ${neon}60` }}
+              />
+
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2.5">
-                  <div className={`w-9 h-9 rounded-full ${c.avatar} flex items-center justify-center text-sm font-bold text-white flex-shrink-0`}>
-                    {name[0]?.toUpperCase() ?? "?"}
+                  {/* Avatar */}
+                  <div
+                    className="w-8 h-8 flex-shrink-0 flex items-center justify-center text-xs font-bold"
+                    style={{
+                      clipPath: "polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px))",
+                      border: `1px solid ${neon}`,
+                      color: neon,
+                      backgroundColor: `${neon}10`,
+                      fontFamily: "var(--font-orbitron, sans-serif)",
+                      textShadow: `0 0 8px ${neon}`,
+                    }}
+                  >
+                    {initial}
                   </div>
-                  <span className="text-sm font-semibold text-slate-700">{name}</span>
+                  <span className="text-sm font-bold text-slate-300 tracking-wide">{name}</span>
                 </div>
-                <div className="flex items-baseline gap-1.5">
-                  <span className={`text-lg font-bold ${c.text}`}>RM {val.toFixed(2)}</span>
-                  <span className="text-xs text-slate-400">{pct}%</span>
+
+                <div className="flex items-baseline gap-2">
+                  <span
+                    className="font-orbitron text-lg font-black tabular-nums"
+                    style={{ color: neon, textShadow: `0 0 10px ${neon}80` }}
+                  >
+                    RM {val.toFixed(2)}
+                  </span>
+                  <span
+                    className="text-[10px] font-bold tabular-nums"
+                    style={{ color: `${neon}60` }}
+                  >
+                    {pct}%
+                  </span>
                 </div>
               </div>
-              <div className="h-1.5 bg-white/70 rounded-full overflow-hidden">
-                <div className={`h-full ${c.bar} rounded-full transition-all duration-300`} style={{ width: `${pct}%` }} />
+
+              {/* Progress bar */}
+              <div className="h-px bg-[#1a2545] overflow-hidden">
+                <div
+                  className="h-full transition-all duration-500"
+                  style={{
+                    width: `${pct}%`,
+                    backgroundColor: neon,
+                    boxShadow: `0 0 6px ${neon}`,
+                  }}
+                />
               </div>
             </div>
           );
