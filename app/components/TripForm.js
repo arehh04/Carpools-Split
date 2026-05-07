@@ -11,13 +11,15 @@ const inputBase =
   "w-full bg-white/5 border border-white/15 rounded-lg text-sm text-slate-300 transition-all " +
   "focus:outline-none focus:border-[#00E5FF]/60 focus:shadow-[0_0_8px_rgba(0,229,255,0.2)] placeholder-slate-600";
 
-export default function TripForm({ distance, setDistance, fuel, setFuel, toll, setToll }) {
+export default function TripForm({ distance, setDistance, fuel, setFuel, toll, setToll, setRouteGeometry }) {
   const [routeUrl, setRouteUrl]       = useState("");
   const [routeLabel, setRouteLabel]   = useState(null);
   const [status, setStatus]           = useState(S.IDLE);
   const [tollIsEstimated, setTollIsEstimated] = useState(false);
+  const [mapVisible, setMapVisible]   = useState(false);
 
-  const autoFilledRef = useRef(false);
+  const autoFilledRef    = useRef(false);
+  const resolvedGeometry = useRef(null);
 
   function clearRoute() {
     if (autoFilledRef.current) {
@@ -26,9 +28,12 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
       autoFilledRef.current = false;
     }
     setTollIsEstimated(false);
+    setMapVisible(false);
     setRouteUrl("");
     setRouteLabel(null);
     setStatus(S.IDLE);
+    resolvedGeometry.current = null;
+    setRouteGeometry(null);
   }
 
   useEffect(() => {
@@ -70,7 +75,7 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
         if (cancelled) return;
 
         if (info?.type === "waze-coords" && info.coords) {
-          const { km, estimatedToll } = await resolveRouteWithToll(info.coords.from, info.coords.to);
+          const { km, estimatedToll, geometry } = await resolveRouteWithToll(info.coords.from, info.coords.to);
           if (cancelled) return;
           autoFilledRef.current = true;
           if (info.label) setRouteLabel(info.label);
@@ -78,6 +83,9 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
           if (estimatedToll > 0) {
             setToll(estimatedToll);
             setTollIsEstimated(true);
+          }
+          if (geometry?.coordinates) {
+            resolvedGeometry.current = { coordinates: geometry.coordinates, totalKm: km };
           }
           setStatus(S.DONE);
           return;
@@ -191,6 +199,27 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
               </div>
             )}
           </div>
+        )}
+
+        {status === S.DONE && resolvedGeometry.current?.coordinates && (
+          <button
+            type="button"
+            onClick={() => {
+              if (mapVisible) {
+                setMapVisible(false);
+                setRouteGeometry(null);
+              } else {
+                setMapVisible(true);
+                setRouteGeometry({
+                  coordinates: resolvedGeometry.current.coordinates,
+                  totalKm: resolvedGeometry.current.totalKm,
+                });
+              }
+            }}
+            className="mt-2 w-full font-orbitron text-[9px] font-bold tracking-widest py-2 border border-[#00E5FF]/25 rounded-lg text-[#00E5FF]/50 hover:text-[#00E5FF] hover:border-[#00E5FF]/60 hover:bg-[#00E5FF]/5 active:scale-[0.97] transition-all duration-200"
+          >
+            {mapVisible ? "[ HIDE ROUTE ]" : "[ VIEW ROUTE ↗ ]"}
+          </button>
         )}
 
         {/* No data */}
