@@ -10,9 +10,9 @@ import { calculateSplit } from "./utils/calc";
 import { encodeTrip, decodeTrip } from "./utils/encode";
 
 export default function Home() {
-  const [distance, setDistance] = useState(351);
-  const [fuel, setFuel] = useState(50);
-  const [toll, setToll] = useState(14);
+  const [distance, setDistance] = useState(0);
+  const [fuel, setFuel] = useState(0);
+  const [toll, setToll] = useState(0);
   const [passengers, setPassengers] = useState([]);
   const [driverName, setDriverName] = useState(null);
   const [result, setResult] = useState({});
@@ -108,6 +108,21 @@ export default function Home() {
           setDriverName={setDriverName}
           distance={distance}
         />
+
+        {/* Hint: crew added but result is still empty */}
+        {Object.keys(result).length === 0 && (driverName != null || passengers.length > 0) && (
+          <div className="relative mb-5 border border-[#00E5FF]/15 bg-[#0d1525]/60 px-4 py-5 text-center">
+            <span className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#00E5FF]/25" />
+            <span className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#00E5FF]/25" />
+            <p className="font-orbitron text-[10px] text-[#00E5FF]/40 tracking-widest">
+              {Number(fuel) === 0 && Number(toll) === 0
+                ? "⚡ ENTER FUEL OR TOLL COST ABOVE"
+                : Number(distance) === 0
+                  ? "⚡ ENTER TRIP DISTANCE ABOVE"
+                  : "⚡ SET KM RANGE FOR PARTIAL PASSENGERS"}
+            </p>
+          </div>
+        )}
 
         <Result result={result} />
 
