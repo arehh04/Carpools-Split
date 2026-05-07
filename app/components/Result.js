@@ -20,15 +20,7 @@ export default function Result({ result, distance, fuel, toll }) {
   return (
     <div className="mb-6">
       {/* Total card */}
-      <div
-        className="relative border border-[#00E5FF]/30 bg-[#0d1525] p-6 mb-4"
-        style={{ boxShadow: "0 0 30px rgba(0,229,255,0.08), inset 0 0 30px rgba(0,229,255,0.03)" }}
-      >
-        {/* Corner brackets */}
-        <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#00E5FF]" />
-        <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#00E5FF]" />
-        <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#00E5FF]" />
-        <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#00E5FF]" />
+      <div className="relative glass rounded-2xl p-6 mb-4">
 
         <p className="font-orbitron text-[9px] text-[#00E5FF]/50 tracking-[0.3em] uppercase mb-2">
           // Total Expenditure
@@ -54,13 +46,9 @@ export default function Result({ result, distance, fuel, toll }) {
           return (
             <div
               key={name}
-              className="relative bg-[#0d1525] px-4 py-4"
-              style={{ borderLeft: `2px solid ${neon}`, borderBottom: `1px solid ${neon}22` }}
+              className="relative glass rounded-xl px-4 py-4"
+              style={{ borderLeft: `2px solid ${neon}` }}
             >
-              <span
-                className="absolute top-0 right-0 w-3 h-3"
-                style={{ borderTop: `1px solid ${neon}60`, borderRight: `1px solid ${neon}60` }}
-              />
 
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2.5">
@@ -143,7 +131,7 @@ export default function Result({ result, distance, fuel, toll }) {
         <button
           type="button"
           onClick={() => setMemoOpen(true)}
-          className="w-full font-orbitron text-[10px] font-bold tracking-widest py-3 border border-dashed border-[#00E5FF]/25 text-[#00E5FF]/40 hover:text-[#00E5FF]/70 hover:border-[#00E5FF]/50 hover:bg-[#00E5FF]/5 active:scale-[0.98] transition-all"
+          className="w-full font-orbitron text-[10px] font-bold tracking-widest py-3 border border-dashed border-[#00E5FF]/25 rounded-lg text-[#00E5FF]/40 hover:text-[#00E5FF]/70 hover:border-[#00E5FF]/60 hover:bg-[#00E5FF]/10 hover:scale-[1.01] hover:shadow-[0_0_24px_rgba(0,229,255,0.45)] active:scale-[0.97] transition-all duration-200"
         >
           SHARE MEMO ↑
         </button>
