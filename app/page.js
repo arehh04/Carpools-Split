@@ -42,16 +42,7 @@ export default function Home() {
       : "";
 
   return (
-    <main
-      className="min-h-screen py-10 px-5 bg-[#070F34]"
-      style={{
-        backgroundImage: `
-          linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px)
-        `,
-        backgroundSize: "40px 40px",
-      }}
-    >
+    <main className="min-h-screen py-10 px-5">
       <div className="max-w-[480px] mx-auto">
 
         <header className="text-center mb-10">
@@ -111,9 +102,7 @@ export default function Home() {
 
         {/* Hint: crew added but result is still empty */}
         {Object.keys(result).length === 0 && (driverName != null || passengers.length > 0) && (
-          <div className="relative mb-5 border border-[#00E5FF]/15 bg-[#0d1525]/60 px-4 py-5 text-center">
-            <span className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#00E5FF]/25" />
-            <span className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#00E5FF]/25" />
+          <div className="glass rounded-xl mb-5 px-4 py-5 text-center">
             <p className="font-orbitron text-[10px] text-[#00E5FF]/40 tracking-widest">
               {Number(fuel) === 0 && Number(toll) === 0
                 ? "⚡ ENTER FUEL OR TOLL COST ABOVE"
