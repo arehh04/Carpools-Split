@@ -8,7 +8,7 @@ export default function RouteMap({ routeGeometry, passengers }) {
   const mapRef = useRef(null);
 
   useEffect(() => {
-    if (!routeGeometry?.coordinates || !containerRef.current) return;
+    if (!routeGeometry?.coordinates?.length || routeGeometry.coordinates.length < 2 || !containerRef.current) return;
 
     let cancelled = false;
 
@@ -44,10 +44,13 @@ export default function RouteMap({ routeGeometry, passengers }) {
       const polyline = L.polyline(latlngs, { color: "#00E5FF", weight: 3, opacity: 0.8 }).addTo(map);
       map.fitBounds(polyline.getBounds(), { padding: [24, 24] });
 
+      const escHtml = (s) =>
+        s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
       const makeIcon = (label, bgColor) =>
         L.divIcon({
           className: "",
-          html: `<div style="background:${bgColor};color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:bold;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,0.4)">${label}</div>`,
+          html: `<div style="background:${bgColor};color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:bold;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,0.4)">${escHtml(label)}</div>`,
           iconAnchor: [0, 10],
         });
 
