@@ -218,7 +218,7 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
           >
             <AlertCircle className="w-3.5 h-3.5 text-[#FF007A] flex-shrink-0 mt-0.5" />
             <p className="text-xs text-[#FF007A]/70">
-              Signal lost — check connection or enter distance manually below.
+              Can't read this link — just type the distance in the field below.
             </p>
           </div>
         )}
@@ -236,7 +236,7 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
               min="0"
               className={`${inputBase} px-3 py-2.5 pr-7 text-center tabular-nums ${distanceHighlight}`}
               value={distance}
-              onChange={(e) => setDistance(e.target.value)}
+              onChange={(e) => { setDistance(e.target.value); setTollIsEstimated(false); }}
               suppressHydrationWarning
             />
             {status === S.DONE ? (
