@@ -47,6 +47,8 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
       }
       setStatus(S.IDLE);
       setRouteLabel(null);
+      setRouteGeometry?.(null);
+      resolvedGeometry.current = null;
       return;
     }
 

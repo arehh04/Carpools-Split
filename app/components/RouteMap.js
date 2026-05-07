@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { interpolateOnRoute } from "../utils/interpolateRoute";
+import "leaflet/dist/leaflet.css";
 
 export default function RouteMap({ routeGeometry, passengers }) {
   const containerRef = useRef(null);
@@ -13,14 +14,6 @@ export default function RouteMap({ routeGeometry, passengers }) {
     let cancelled = false;
 
     async function init() {
-      if (!document.getElementById("leaflet-css")) {
-        const link = document.createElement("link");
-        link.id = "leaflet-css";
-        link.rel = "stylesheet";
-        link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
-        document.head.appendChild(link);
-      }
-
       const L = (await import("leaflet")).default;
       if (cancelled) return;
 
