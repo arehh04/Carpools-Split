@@ -16,7 +16,7 @@ export default function ShareBar({ url }) {
     <div className="mb-12">
       <button
         onClick={copy}
-        className="w-full flex items-center justify-center gap-2.5 py-4 font-orbitron text-xs font-bold tracking-widest uppercase transition-all active:scale-95"
+        className="w-full flex items-center justify-center gap-2.5 py-4 font-orbitron text-xs font-bold tracking-widest uppercase transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]"
         style={{
           clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))",
           border: copied ? "2px solid #00FF9F" : "2px solid #00E5FF",
