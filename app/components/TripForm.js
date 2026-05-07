@@ -8,8 +8,8 @@ import { resolveRouteDistance, resolveRouteWithToll } from "../utils/resolveDist
 const S = { IDLE: "idle", RESOLVING: "resolving", DONE: "done", NO_DATA: "no_data", ERROR: "error" };
 
 const inputBase =
-  "w-full bg-[#050d1e] border border-[#00E5FF]/20 text-sm text-slate-300 transition-all " +
-  "focus:outline-none focus:border-[#00E5FF]/60 focus:shadow-[0_0_8px_rgba(0,229,255,0.2)] placeholder-[#00E5FF]/20";
+  "w-full bg-white/5 border border-white/15 rounded-lg text-sm text-slate-300 transition-all " +
+  "focus:outline-none focus:border-[#00E5FF]/60 focus:shadow-[0_0_8px_rgba(0,229,255,0.2)] placeholder-slate-600";
 
 export default function TripForm({ distance, setDistance, fuel, setFuel, toll, setToll }) {
   const [routeUrl, setRouteUrl]       = useState("");
@@ -115,10 +115,7 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
     : "";
 
   return (
-    <div className="hud-card relative border border-[#00E5FF]/20 bg-[#0d1525] p-6 mb-4">
-      {/* Extra corner brackets (top-right, bottom-left) */}
-      <span className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[#00E5FF]" />
-      <span className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[#00E5FF]" />
+    <div className="glass rounded-2xl p-6 mb-4">
 
       {/* Section header */}
       <div className="flex items-center gap-2 mb-5">
@@ -147,7 +144,7 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
               type="button"
               onClick={clearRoute}
               title="Clear route"
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#1a2545] hover:bg-[#FF007A]/20 flex items-center justify-center transition-colors"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white/10 hover:bg-[#FF007A]/20 flex items-center justify-center transition-colors"
               suppressHydrationWarning
             >
               <X className="w-2.5 h-2.5 text-slate-500 hover:text-[#FF007A]" />
@@ -160,7 +157,7 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
           <div
             role="status"
             aria-live="polite"
-            className="mt-2 flex items-center gap-2 border border-[#00E5FF]/20 bg-[#00E5FF]/5 px-3.5 py-2.5"
+            className="mt-2 flex items-center gap-2 border border-[#00E5FF]/20 bg-[#00E5FF]/5 rounded-lg px-3.5 py-2.5"
           >
             <Loader2 className="w-3.5 h-3.5 animate-spin text-[#00E5FF] flex-shrink-0" />
             <p className="text-xs text-[#00E5FF]/60">Scanning route data…</p>
@@ -169,7 +166,7 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
 
         {/* Done */}
         {status === S.DONE && (
-          <div className="mt-2 border border-[#00FF9F]/30 bg-[#00FF9F]/5 px-3.5 py-2.5">
+          <div className="mt-2 border border-[#00FF9F]/30 bg-[#00FF9F]/5 rounded-lg px-3.5 py-2.5">
             {hasRouteParts ? (
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#00FF9F] flex-shrink-0" />
@@ -201,7 +198,7 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
           <div
             role="status"
             aria-live="polite"
-            className="mt-2 flex items-start gap-2 border border-[#F8E71C]/30 bg-[#F8E71C]/5 px-3.5 py-2.5"
+            className="mt-2 flex items-start gap-2 border border-[#F8E71C]/30 bg-[#F8E71C]/5 rounded-lg px-3.5 py-2.5"
           >
             <AlertCircle className="w-3.5 h-3.5 text-[#F8E71C] flex-shrink-0 mt-0.5" />
             <p className="text-xs text-[#F8E71C]/70">
@@ -214,7 +211,7 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
         {status === S.ERROR && (
           <div
             role="alert"
-            className="mt-2 flex items-start gap-2 border border-[#FF007A]/30 bg-[#FF007A]/5 px-3.5 py-2.5"
+            className="mt-2 flex items-start gap-2 border border-[#FF007A]/30 bg-[#FF007A]/5 rounded-lg px-3.5 py-2.5"
           >
             <AlertCircle className="w-3.5 h-3.5 text-[#FF007A] flex-shrink-0 mt-0.5" />
             <p className="text-xs text-[#FF007A]/70">
