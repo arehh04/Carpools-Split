@@ -3,7 +3,9 @@ export function encodeTrip(data) {
     .map((x) => `${x.name},${x.start},${x.end}`)
     .join("|");
 
-  return `?d=${data.distance}&f=${data.fuel}&t=${data.toll}&p=${encodeURIComponent(p)}`;
+  let url = `?d=${data.distance}&f=${data.fuel}&t=${data.toll}&p=${encodeURIComponent(p)}`;
+  if (data.driverName != null) url += `&dr=${encodeURIComponent(data.driverName)}`;
+  return url;
 }
 
 export function decodeTrip() {
@@ -24,5 +26,7 @@ export function decodeTrip() {
       });
   }
 
-  return { distance, fuel, toll, passengers };
+  const driverName = params.has("dr") ? decodeURIComponent(params.get("dr") ?? "") : null;
+
+  return { distance, fuel, toll, passengers, driverName };
 }

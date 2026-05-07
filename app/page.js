@@ -14,6 +14,7 @@ export default function Home() {
   const [fuel, setFuel] = useState(50);
   const [toll, setToll] = useState(14);
   const [passengers, setPassengers] = useState([]);
+  const [driverName, setDriverName] = useState(null);
   const [result, setResult] = useState({});
 
   useEffect(() => {
@@ -22,15 +23,16 @@ export default function Home() {
     if (data.fuel) setFuel(data.fuel);
     if (data.toll) setToll(data.toll);
     if (data.passengers.length) setPassengers(data.passengers);
+    if (data.driverName != null) setDriverName(data.driverName);
   }, []);
 
   useEffect(() => {
-    setResult(calculateSplit(distance, fuel, toll, passengers));
-  }, [distance, fuel, toll, passengers]);
+    setResult(calculateSplit(distance, fuel, toll, passengers, driverName));
+  }, [distance, fuel, toll, passengers, driverName]);
 
   const shareUrl =
     typeof window !== "undefined"
-      ? window.location.origin + encodeTrip({ distance, fuel, toll, passengers })
+      ? window.location.origin + encodeTrip({ distance, fuel, toll, passengers, driverName })
       : "";
 
   return (
@@ -93,7 +95,13 @@ export default function Home() {
           setToll={setToll}
         />
 
-        <PassengerTable passengers={passengers} setPassengers={setPassengers} />
+        <PassengerTable
+          passengers={passengers}
+          setPassengers={setPassengers}
+          driverName={driverName}
+          setDriverName={setDriverName}
+          distance={distance}
+        />
 
         <Result result={result} />
 

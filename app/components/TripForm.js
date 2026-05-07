@@ -12,9 +12,10 @@ const inputBase =
   "focus:outline-none focus:border-[#00E5FF]/60 focus:shadow-[0_0_8px_rgba(0,229,255,0.2)] placeholder-[#00E5FF]/20";
 
 export default function TripForm({ distance, setDistance, fuel, setFuel, toll, setToll }) {
-  const [routeUrl, setRouteUrl]     = useState("");
-  const [routeLabel, setRouteLabel] = useState(null);
-  const [status, setStatus]         = useState(S.IDLE);
+  const [routeUrl, setRouteUrl]       = useState("");
+  const [routeLabel, setRouteLabel]   = useState(null);
+  const [status, setStatus]           = useState(S.IDLE);
+  const [tollIsEstimated, setTollIsEstimated] = useState(false);
 
   const autoFilledRef = useRef(false);
 
@@ -24,6 +25,7 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
       setToll(0);
       autoFilledRef.current = false;
     }
+    setTollIsEstimated(false);
     setRouteUrl("");
     setRouteLabel(null);
     setStatus(S.IDLE);
@@ -73,7 +75,10 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
           autoFilledRef.current = true;
           if (info.label) setRouteLabel(info.label);
           setDistance(km);
-          if (estimatedToll > 0) setToll(estimatedToll);
+          if (estimatedToll > 0) {
+            setToll(estimatedToll);
+            setTollIsEstimated(true);
+          }
           setStatus(S.DONE);
           return;
         }
@@ -260,17 +265,22 @@ export default function TripForm({ distance, setDistance, fuel, setFuel, toll, s
         </label>
 
         <label className="block">
-          <span className="text-[10px] font-bold text-[#00E5FF]/50 tracking-widest block mb-1 uppercase">
+          <span className="text-[10px] font-bold text-[#00E5FF]/50 tracking-widest block mb-1 uppercase flex items-center gap-1">
             Toll
+            {tollIsEstimated && (
+              <span className="text-[8px] font-bold px-1 py-0.5 border border-[#F8E71C]/40 text-[#F8E71C]/70 tracking-widest">
+                EST
+              </span>
+            )}
           </span>
           <div className="relative">
             <span className="absolute left-2 top-1/2 -translate-y-1/2 text-[10px] text-[#00E5FF]/30 pointer-events-none">RM</span>
             <input
               type="number"
               min="0"
-              className={`${inputBase} px-3 py-2.5 pl-7 text-center tabular-nums`}
+              className={`${inputBase} px-3 py-2.5 pl-7 text-center tabular-nums ${tollIsEstimated ? "border-[#F8E71C]/30" : ""}`}
               value={toll}
-              onChange={(e) => setToll(e.target.value)}
+              onChange={(e) => { setToll(e.target.value); setTollIsEstimated(false); }}
               suppressHydrationWarning
             />
           </div>
