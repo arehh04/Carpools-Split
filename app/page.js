@@ -99,7 +99,6 @@ export default function Home() {
           <RouteMap
             routeGeometry={routeGeometry}
             passengers={passengers}
-            distance={distance}
           />
         )}
 
