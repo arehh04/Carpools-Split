@@ -67,6 +67,16 @@ export async function GET(request) {
       finalUrl = await followRedirect(raw, "GET");
     }
 
+    // Validate redirect target is also on the allowlist (prevents SSRF via redirect chain)
+    if (finalUrl && finalUrl !== raw) {
+      try {
+        const finalParsed = new URL(finalUrl);
+        if (isPrivate(finalParsed.hostname) || !ALLOWED_HOSTS.has(finalParsed.hostname)) {
+          finalUrl = raw; // return original, let client handle NO_DATA
+        }
+      } catch { finalUrl = raw; }
+    }
+
     return Response.json({ finalUrl: finalUrl ?? raw });
   } catch (err) {
     const message = err.name === "AbortError" ? "Request timed out" : "Could not resolve URL";
