@@ -6,6 +6,7 @@ import TripForm from "./components/TripForm";
 import PassengerTable from "./components/PassengerTable";
 import Result from "./components/Result";
 import ShareBar from "./components/ShareBar";
+import RouteMap from "./components/RouteMap";
 import { calculateSplit } from "./utils/calc";
 import { encodeTrip, decodeTrip } from "./utils/encode";
 
@@ -16,6 +17,7 @@ export default function Home() {
   const [passengers, setPassengers] = useState([]);
   const [driverName, setDriverName] = useState(null);
   const [result, setResult] = useState({});
+  const [routeGeometry, setRouteGeometry] = useState(null);
 
   useEffect(() => {
     const data = decodeTrip();
@@ -90,7 +92,16 @@ export default function Home() {
           setFuel={setFuel}
           toll={toll}
           setToll={setToll}
+          setRouteGeometry={setRouteGeometry}
         />
+
+        {routeGeometry && (
+          <RouteMap
+            routeGeometry={routeGeometry}
+            passengers={passengers}
+            distance={distance}
+          />
+        )}
 
         <PassengerTable
           passengers={passengers}
